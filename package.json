@@ -1,0 +1,19 @@
+{
+  "name": "kanban-project-server",
+  "version": "1.0.0",
+  "description": "Kanban project backend server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Matthew Man",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node": "^15.10.0",
+    "node-dev": "^6.4.0",
+    "pg": "^8.5.1"
+  }
+}
