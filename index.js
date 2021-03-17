@@ -33,7 +33,7 @@ app.get("/columns", async (req, res) => {
 
 app.get("/tasks/:columnId", async (req, res) => {
     const columnId = req.params.columnId;
-    const response = await client.query("SELECT * FROM tasks WHERE stage_id = $1", [columnId]);
+    const response = await client.query("SELECT * FROM tasks WHERE stage_id = $1;", [columnId]);
     const arrayOfTasks = response.rows;
     res.json({
         "status": "success",
@@ -41,7 +41,15 @@ app.get("/tasks/:columnId", async (req, res) => {
     })
 })
 
-app.post("/tasks")
+app.post("/tasks/:taskId/:newStageId", async (req, res) => {
+    const taskId = req.params.taskId;
+    const newStageId = req.params.newStageId;
+    // console.log(newStageId, taskId)
+    await client.query("UPDATE tasks SET stage_id = $1 WHERE id = $2;", [newStageId, taskId])
+    res.status(201).json({
+        "status": "success",
+    })
+})
 
 app.delete("/tasks/:taskId")
 
