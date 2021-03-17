@@ -31,24 +31,19 @@ app.get("/columns", async (req, res) => {
     });
 })
 
-app.get("/tasks", (req, res) => {
+app.get("/tasks/:columnId", async (req, res) => {
+    const columnId = req.params.columnId;
+    const response = await client.query("SELECT * FROM tasks WHERE stage_id = $1", [columnId]);
+    const arrayOfTasks = response.rows;
     res.json({
         "status": "success",
-        "data": [{
-            "id": 1,
-            "stage_id": 1,
-            "task_description": "demo task description"
-            },{
-            "id": 2,
-            "stage_id": 1,
-            "task_description": "demo task description 2"
-        }]
+        "data": arrayOfTasks
     })
 })
 
 app.post("/tasks")
 
-app.delete("/tasks/:id")
+app.delete("/tasks/:taskId")
 
 
 
