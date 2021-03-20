@@ -45,7 +45,7 @@ app.get("/columns", async (req, res) => {
 // })
 
 app.get("/tasks/all", async (req, res) => {
-    const response = await client.query("SELECT * FROM tasks");
+    const response = await client.query("SELECT * FROM tasks ORDER BY id");
     const arrayOfAllTasks = response.rows;
     res.json({
         "status": "success",
