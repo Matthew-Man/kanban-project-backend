@@ -11,8 +11,8 @@ app.use(express.json()) //Parse JSON body in requests
 
 
 const client = new Client({
-    database: "kanbanproject"
-    // connectionstring: process.env.DATABASE_URI
+    // database: "kanbanproject"
+    connectionstring: process.env.DATABASE_URI
 })
 client.connect();
 
