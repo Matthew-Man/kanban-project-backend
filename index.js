@@ -85,5 +85,5 @@ app.delete("/tasks/:taskId", async (req, res) => {
 
 
 
-const port = parseInt(process.env.PORT);
+const port = parseInt(process.env.PORT || 4000);
 app.listen(port, () => console.log(`Server listening on port ${port}`))
