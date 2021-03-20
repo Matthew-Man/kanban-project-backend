@@ -33,7 +33,7 @@ app.get("/columns", async (req, res) => {
         "message": "user columns",
         "data": arrayOfColumns
     });
-})
+});
 
 // app.get("/tasks/:columnId", async (req, res) => {
 //     const columnId = req.params.columnId;
