@@ -12,7 +12,10 @@ app.use(express.json()) //Parse JSON body in requests
 
 const client = new Client({
     // database: "kanbanproject"
-    connectionstring: process.env.DATABASE_URI
+    connectionString: process.env.DATABASE_URI,
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 client.connect();
 
@@ -82,5 +85,5 @@ app.delete("/tasks/:taskId", async (req, res) => {
 
 
 
-
-app.listen(4000, () => console.log("Server listening on port 4000"))
+const port = parseInt(process.env.DB_PORT);
+app.listen(port, () => console.log(`Server listening on port ${port}`))
