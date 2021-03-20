@@ -27,18 +27,27 @@ app.get("/", (req, res) => {
 });
 
 app.get("/columns", async (req, res) => {
-    try {
+    // try {
         const response = await client.query("SELECT * FROM stages");
         const arrayOfColumns = response.rows;
         res.json({
             "message": "user columns",
             "data": arrayOfColumns
         });
-    }
-    catch (err) {
-        throw new Error(console.log(err))
-    }
+    // }
+    // catch (err) {
+    //     throw console.log(err)
+    // }
 });
+
+app.put("/columns", async (req, res) => {
+    const { columnName } = req.body;
+    await client.query("INSERT INTO stages(name) VALUES($1);", [columnName])
+    res.json({
+        "message": "Insert column requested",
+        "columnName": columnName
+    })
+})
 
 // app.get("/tasks/:columnId", async (req, res) => {
 //     const columnId = req.params.columnId;
