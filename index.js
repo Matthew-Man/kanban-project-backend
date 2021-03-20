@@ -2,13 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import pg from "pg";
-import { stringify } from "querystring";
+import bodyParser from "body-parser"
 
 const { Client } = pg;
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json()) //Parse JSON body in requests
+// app.use(bodyParser.json())
 
 
 const client = new Client({
@@ -64,7 +65,7 @@ app.put("/tasks/:taskId/:newStageId", async (req, res) => {
 
 app.put("/tasks/new", async (req, res) => {
     const {taskDescription, stageId} = req.body
-    console.log(req)
+    await client.query("INSERT INTO tasks(stage_id, task_description) VALUES($1, $2);", [stageId, taskDescription])
     res.json({
         "message": "Received",
         "description": taskDescription,
