@@ -27,12 +27,17 @@ app.get("/", (req, res) => {
 });
 
 app.get("/columns", async (req, res) => {
-    const response = await client.query("SELECT * FROM stages");
-    const arrayOfColumns = response.rows;
-    res.json({
-        "message": "user columns",
-        "data": arrayOfColumns
-    });
+    try {
+        const response = await client.query("SELECT * FROM stages");
+        const arrayOfColumns = response.rows;
+        res.json({
+            "message": "user columns",
+            "data": arrayOfColumns
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }
 });
 
 // app.get("/tasks/:columnId", async (req, res) => {
