@@ -9,10 +9,10 @@ dotenv.config();
 app.use(cors());
 app.use(express.json()) //Parse JSON body in requests
 
-console.log(process.env.DATABASE_URI ? process.env.DATABASE_URI.length : "No DB URI")
+console.log(process.env.DATABASE_URL ? process.env.DATABASE_URL.length : "No DB URI")
 const client = new Client({
     // database: "kanbanproject"
-    connectionString: process.env.DATABASE_URI,
+    connectionString: process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false
     }
