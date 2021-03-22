@@ -9,7 +9,7 @@ dotenv.config();
 app.use(cors());
 app.use(express.json()) //Parse JSON body in requests
 
-
+console.log(process.env.DATABASE_URI ? process.env.DATABASE_URI.length : "No DB URI")
 const client = new Client({
     // database: "kanbanproject"
     connectionString: process.env.DATABASE_URI,
