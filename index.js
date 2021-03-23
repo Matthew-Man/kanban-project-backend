@@ -49,6 +49,15 @@ app.put("/columns", async (req, res) => {
     })
 })
 
+app.delete("/columns/:columnId", async (req,res) => {
+    const columnId = req.params.columnId;
+    await client.query("DELETE FROM stages WHERE id=$1;", [columnId])
+    res.json({
+        "message": "Column delete requested",
+        "columnId": columnId
+    })
+})
+
 // app.get("/tasks/:columnId", async (req, res) => {
 //     const columnId = req.params.columnId;
 //     const response = await client.query("SELECT * FROM tasks WHERE stage_id = $1;", [columnId]);
