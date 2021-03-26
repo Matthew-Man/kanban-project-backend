@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 app.get("/columns", async (req, res) => {
     // try {
-        const response = await client.query("SELECT * FROM stages");
+        const response = await client.query("SELECT * FROM stages ORDER BY order_number");
         const arrayOfColumns = response.rows;
         res.json({
             "message": "user columns",
