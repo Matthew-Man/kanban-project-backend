@@ -41,8 +41,8 @@ app.get("/columns", async (req, res) => {
 });
 
 app.post("/columns", async (req, res) => {
-    const { columnName } = req.body;
-    await client.query("INSERT INTO stages(name) VALUES($1);", [columnName])
+    const { columnName, order_number } = req.body;
+    await client.query("INSERT INTO stages(name, order_number) VALUES($1, $2);", [columnName, order_number])
     res.json({
         "message": "Insert column requested",
         "columnName": columnName
@@ -50,7 +50,7 @@ app.post("/columns", async (req, res) => {
 })
 
 app.put("/columns", async (req, res) => {
-    const {id, order_number} = req.body;
+    const { id, order_number } = req.body;
     await client.query("UPDATE stages SET order_number = $1 WHERE id = $2;", [order_number, id])
     res.json({
         "message": "Update order number requested",
